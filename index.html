@@ -8,15 +8,9 @@
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
-
-
-  <!-- Load Esri Leaflet from CDN -->
   <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
   integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
   crossorigin=""></script>
-
-
-  <!-- Load Esri Leaflet Geocoder from CDN -->
   <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder.css"
     integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
     crossorigin="">
@@ -28,19 +22,7 @@
 <body>
   <div>
     <label>result:</label>
-    <input id="txtx" type="text">
-    <br>
-    <br>
-    <label>city:</label>
     <input id="txt3" type="text">
-    <br>
-    <br>
-    <label>subregion:</label>
-    <input id="txt4" type="text">
-    <br>
-    <br>
-    <label>region:</label>
-    <input id="txt5" type="text">
     <br>
     <br>
     <!-- زر ارجاع البيانات و تعبئة الحقول -->
@@ -80,10 +62,7 @@
             }
           }
           console.log(result.address)
-          document.getElementById("txtx").value = txt3;
-          document.getElementById("txt3").value =result.address.City;
-          document.getElementById("txt4").value = result.address.Subregion;
-          document.getElementById("txt5").value =result.address.Region;
+          document.getElementById("txt3").value = txt3;
           }
         });
       });
