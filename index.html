@@ -1,0 +1,52 @@
+<html>
+
+<head>
+  <!-- Load Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
+  <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
+    integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
+    crossorigin=""></script>
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder.js"
+    integrity="sha512-8twnXcrOGP3WfMvjB0jS5pNigFuIWj4ALwWEgxhZ+mxvjF5/FBPVd5uAxqT8dd2kUmTVK9+yQJ4CmTmSg/sXAQ=="
+    crossorigin=""></script>
+  <!---------------->
+</head>
+<body>
+  <div>
+    <label>city:</label>
+    <input id="txt3" type="text">
+    <br>
+    <br>
+    <!-- زر ارجاع البيانات و تعبئة الحقول -->
+    <button onclick="getCity()">Get my City</button>
+  </div>
+  <p> NOTE: You have to enable "Location Access" on your device first.</p>
+  <script>
+    var txt1, txt2, txt3;
+    function getCity() {
+      navigator.geolocation.getCurrentPosition(position => {
+        // جلب دائرة العرض 
+        txt1 = position.coords.latitude;
+        // جلب خط الطول
+        txt2 = position.coords.longitude;
+        var geocodeService = L.esri.Geocoding.geocodeService();
+        // جلب المدينة باستخدام دائرة العرض و خط الطول
+        geocodeService.reverse().latlng([txt1, txt2]).run(function (error, result) {
+          if (error) {
+            return "error";
+          }
+          else
+          {
+          //جلب المدينة
+          txt3 = result.address.Region;
+          document.getElementById("txt3").value = txt3;
+          }
+        });
+      });
+    }
+
+  </script>
+</body>
+</html>
