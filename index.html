@@ -1,17 +1,5 @@
 <html>
-
 <head>
-  <!-- Load Leaflet -->
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-  crossorigin=""></script>
-  <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
-  integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
-  crossorigin=""></script>
-  <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder.js"
-    integrity="sha512-8twnXcrOGP3WfMvjB0jS5pNigFuIWj4ALwWEgxhZ+mxvjF5/FBPVd5uAxqT8dd2kUmTVK9+yQJ4CmTmSg/sXAQ=="
-    crossorigin=""></script>
-  <!---------------->
 </head>
 <body>
   <div>
@@ -24,8 +12,10 @@
   </div>
   <p> NOTE: You have to enable "Location Access" on your device first.</p>
   <script>
-    var txt1, txt2, txt3;
-    function getCity() {
+    var txt1, txt2, txt3="";
+    // دالة جلب المدينة
+    function getCity() 
+    {
       navigator.geolocation.getCurrentPosition(position => {
         // جلب دائرة العرض 
         txt1 = position.coords.latitude;
@@ -39,28 +29,34 @@
           }
           else
           {
-          //جلب المدينة
-          if(result.address.Subregion!="")
-          {
-            txt3 = result.address.Subregion;
-          }
-          else
-          {
-            if(result.address.City!="")
+          //جلب المدينة على هيئة المدينة -المدينة الاكبر - المدينة الاكبر
+            if(result.address.Neighborhood!="")
             {
-              txt3 = result.address.City;
+              txt3+=result.address.Neighborhood+"-";
             }
-            else
+            if(result.address.City!=""&&(result.address.City!=result.address.Neighborhood)&&(result.address.City!=result.address.Subregion)&&(result.address.City!=result.address.Region))
             {
-              txt3 = result.address.Region;
+              txt3+=result.address.City+"-";
             }
-          }
+            if(result.address.Subregion!=""&&(result.address.Subregion!=result.address.Region))
+            {
+              txt3+=result.address.Subregion+"-";
+            }
+            if(result.address.Region!="")
+            {
+              txt3+=result.address.Region;
+            }
+          //تعبئة حقل المدينة 
           document.getElementById("txt3").value = txt3;
           }
         });
       });
     }
-
   </script>
+  <!--تحميل ملفات مكتبة leaflet.js-->
+  <script src="leaflet.js"></script>
+  <script src="esri-leaflet.js"></script>
+  <script src="esri-leaflet-geocoder.js"></script>
+  <!-------------------->
 </body>
 </html>
